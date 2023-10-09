@@ -1,0 +1,109 @@
+2023-10-05T06:22:42.984454Z   INFO - http.server: 127.0.0.1 - GET / HTTP/1.1 - 302 (15.44s)
+2023-10-05T06:35:51.183663Z   INFO - http.server: 127.0.0.1 - GET /?a=0 HTTP/1.1 - 302 (32.65µs)
+2023-10-05T11:57:33.414019Z   INFO - http.server: 127.0.0.1 - GET /hello HTTP/1.1 - 200 (1.30µs)
+2023-10-05T11:58:12.201233Z   INFO - http.server: 127.0.0.1 - GET /hello HTTP/1.1 - 200 (424.40µs)
+2023-10-05T12:29:14.306868Z   INFO - http.server: 127.0.0.1 - GET /echo?message=Hello+World%21 HTTP/1.1 - 200 (590.80µs)
+2023-10-05T12:29:41.753502Z   INFO - http.server: 127.0.0.1 - GET /echo?message=Hello+You%21 HTTP/1.1 - 200 (97.35µs)
+2023-10-05T12:30:29.145051Z   INFO - http.server: 127.0.0.1 - GET /echo HTTP/1.1 - 200 (41.73µs)
+2023-10-05T12:37:16.440739Z   INFO - http.server: 127.0.0.1 - GET / HTTP/1.1 - 302 (54.49µs)
+2023-10-05T12:42:59.860873Z   INFO - http.server: 127.0.0.1 - GET /hello HTTP/1.1 - 200 (91.64µs)
+2023-10-05T12:43:05.634665Z   INFO - http.server: 127.0.0.1 - GET /echo?message=Hello+You%21 HTTP/1.1 - 200 (1.15ms)
+2023-10-05T12:54:52.197513Z   INFO - http.server: 127.0.0.1 - GET /echo_form HTTP/1.1 - 200 (478.84µs)
+2023-10-05T12:56:04.749585Z   INFO - http.server: 127.0.0.1 - GET /echo_form HTTP/1.1 - 200 (256.48µs)
+2023-10-05T12:56:22.257377Z   INFO - http.server: 127.0.0.1 - GET /echo_form HTTP/1.1 - 200 (161.66µs)
+2023-10-05T12:58:44.266340Z   INFO - http.server: 127.0.0.1 - GET /echo_form HTTP/1.1 - 200 (167.70µs)
+2023-10-05T12:59:03.298235Z   INFO - http.server: 127.0.0.1 - GET /echo_form HTTP/1.1 - 200 (179.21µs)
+2023-10-05T12:59:03.769992Z   INFO - http.server: 127.0.0.1 - GET /favicon.ico HTTP/1.1 - 200 (3.71µs)
+2023-10-05T13:01:44.532677Z   INFO - http.server: 127.0.0.1 - GET /echo_form HTTP/1.1 - 200 (1.21ms)
+2023-10-05T13:01:58.573480Z   INFO - http.server: 127.0.0.1 - GET /echo_form HTTP/1.1 - 200 (88.69µs)
+2023-10-05T13:01:58.681545Z   INFO - http.server: 127.0.0.1 - GET /favicon.ico HTTP/1.1 - 200 (1.83µs)
+2023-10-05T22:38:09.344909Z   INFO - http.server: 127.0.0.1 - GET / HTTP/1.1 - 302 (41.62µs)
+2023-10-05T22:38:18.214875Z   INFO - http.server: 127.0.0.1 - GET /hello HTTP/1.1 - 200 (18.52µs)
+2023-10-05T22:38:36.330362Z   INFO - http.server: 127.0.0.1 - GET /echo?message=Joe HTTP/1.1 - 200 (18.06µs)
+2023-10-06T02:12:43.559023Z   INFO - http.server: 127.0.0.1 - GET / HTTP/1.1 - 302 (29.98µs)
+2023-10-06T02:12:43.952866Z   INFO - http.server: 127.0.0.1 - GET /favicon.ico HTTP/1.1 - 200 (4.01µs)
+2023-10-06T02:12:47.950444Z   INFO - http.server: 127.0.0.1 - GET /echo?message=Hello+You%21 HTTP/1.1 - 200 (115.08µs)
+2023-10-06T02:12:53.585229Z   INFO - http.server: 127.0.0.1 - GET /echo_form HTTP/1.1 - 200 (213.41µs)
+2023-10-06T02:16:37.912185Z   INFO - http.server: 127.0.0.1 - GET /echo_form HTTP/1.1 - 200 (59.25µs)
+2023-10-06T02:17:45.990418Z   INFO - http.server: 127.0.0.1 - GET /echo_form HTTP/1.1 - 200 (513.80µs)
+2023-10-06T02:18:54.210915Z   INFO - http.server: 127.0.0.1 - GET /echo_form HTTP/1.1 - 200 (488.16µs)
+2023-10-06T02:23:34.479762Z   INFO - http.server: 127.0.0.1 - GET /echo_form HTTP/1.1 - 200 (683.24µs)
+2023-10-06T02:26:09.327870Z   INFO - http.server: 127.0.0.1 - GET /echo HTTP/1.1 - 200 (625.00µs)
+2023-10-06T02:26:17.648277Z   INFO - http.server: 127.0.0.1 - GET /echo?message=Hello+You%21 HTTP/1.1 - 200 (226.12µs)
+2023-10-06T05:06:18.569547Z   INFO - http.server: 127.0.0.1 - GET /session HTTP/1.1 - 200 (73.54µs)
+2023-10-06T05:06:47.714239Z   INFO - http.server: 127.0.0.1 - GET /cgi-bin/hello.cgi HTTP/1.1 - 200 (263.84µs)
+2023-10-06T06:06:53.194004Z   INFO - http.server: 127.0.0.1 - GET /cgi-bin/hello.cgi HTTP/1.1 - 200 (18.54µs)
+2023-10-06T06:08:48.737720Z   INFO - http.server: 127.0.0.1 - GET /cgi-bin/hello.cgi HTTP/1.1 - 200 (17.72s)
+2023-10-06T06:09:49.104397Z   INFO - http.server: 127.0.0.1 - GET /cgi-bin/hello.cgi HTTP/1.1 - 200 (18.76µs)
+2023-10-06T06:11:38.510879Z   INFO - http.server: 127.0.0.1 - GET /cgi-bin/hello.cgi HTTP/1.1 - 200 (1.01m)
+2023-10-06T06:13:57.382795Z   INFO - http.server: 127.0.0.1 - GET /cgi-bin/hello.cgi HTTP/1.1 - 200 (18.43µs)
+2023-10-06T08:07:35.228027Z   INFO - http.server: 127.0.0.1 - GET /cgi-bin/hello.cgi HTTP/1.1 - 200 (1.45ms)
+2023-10-06T08:10:35.871416Z   INFO - http.server: 127.0.0.1 - GET /cgi-bin/hello.cgi HTTP/1.1 - 200 (2.39m)
+2023-10-06T08:12:24.679344Z   INFO - http.server: 127.0.0.1 - GET /cgi-bin/hello.cgi HTTP/1.1 - 200 (25.60s)
+2023-10-06T08:28:49.689558Z   INFO - http.server: 127.0.0.1 - GET /cgi-bin/hello.cgi HTTP/1.1 - 200 (18.26s)
+2023-10-06T08:30:24.387169Z   INFO - http.server: 127.0.0.1 - GET /cgi-bin/hello.cgi HTTP/1.1 - 200 (30.23ms)
+2023-10-06T08:30:24.482012Z   INFO - http.server: 127.0.0.1 - GET /favicon.ico HTTP/1.1 - 200 (21.73µs)
+2023-10-06T08:36:49.930948Z   INFO - http.server: 127.0.0.1 - GET /cgi-bin/hello.cgi HTTP/1.1 - 200 (15.39ms)
+2023-10-06T08:37:04.876204Z   INFO - http.server: 127.0.0.1 - GET /cgi-bin/hello.cgi HTTP/1.1 - 200 (18.30ms)
+2023-10-06T08:37:06.664458Z   INFO - http.server: 127.0.0.1 - GET /cgi-bin/hello.cgi HTTP/1.1 - 200 (16.82ms)
+2023-10-06T11:24:32.702094Z   INFO - http.server: 127.0.0.1 - GET /cgi-bin/hello.cgi HTTP/1.1 - 200 (16.12ms)
+2023-10-06T11:24:32.702118Z  ERROR - http.server: Unhandled exception
+Negative count: -1 (ArgumentError)
+  from /usr/share/crystal/src/indexable.cr:967:5 in '[]?'
+  from /usr/share/crystal/src/array.cr:655:5 in '[]'
+  from src/handlers.cr:34:9 in 'call'
+  from /usr/share/crystal/src/http/server/handler.cr:30:7 in 'call_next'
+  from /usr/share/crystal/src/http/server/handlers/log_handler.cr:17:7 in 'call'
+  from /usr/share/crystal/src/http/server/handler.cr:30:7 in 'call_next'
+  from /usr/share/crystal/src/http/server/handlers/static_file_handler.cr:80:12 in 'call'
+  from /usr/share/crystal/src/http/server/handler.cr:30:7 in 'call_next'
+  from /usr/share/crystal/src/http/server/handlers/error_handler.cr:18:5 in 'call'
+  from /usr/share/crystal/src/http/server/request_processor.cr:51:11 in 'process'
+  from /usr/share/crystal/src/http/server.cr:521:5 in 'handle_client'
+  from /usr/share/crystal/src/http/server.cr:451:5 in '->'
+  from /usr/share/crystal/src/fiber.cr:146:11 in 'run'
+  from /usr/share/crystal/src/fiber.cr:98:34 in '->'
+  from ???
+
+2023-10-06T11:28:18.332488Z   INFO - http.server: 127.0.0.1 - GET /cgi-bin/hello.cgi HTTP/1.1 - 200 (52.89s)
+2023-10-06T11:28:18.332538Z  ERROR - http.server: Unhandled exception
+Negative count: -1 (ArgumentError)
+  from /usr/share/crystal/src/indexable.cr:967:5 in '[]?'
+  from /usr/share/crystal/src/array.cr:655:5 in '[]'
+  from src/handlers.cr:34:9 in 'call'
+  from /usr/share/crystal/src/http/server/handler.cr:30:7 in 'call_next'
+  from /usr/share/crystal/src/http/server/handlers/log_handler.cr:17:7 in 'call'
+  from /usr/share/crystal/src/http/server/handler.cr:30:7 in 'call_next'
+  from /usr/share/crystal/src/http/server/handlers/static_file_handler.cr:80:12 in 'call'
+  from /usr/share/crystal/src/http/server/handler.cr:30:7 in 'call_next'
+  from /usr/share/crystal/src/http/server/handlers/error_handler.cr:18:5 in 'call'
+  from /usr/share/crystal/src/http/server/request_processor.cr:51:11 in 'process'
+  from /usr/share/crystal/src/http/server.cr:521:5 in 'handle_client'
+  from /usr/share/crystal/src/http/server.cr:451:5 in '->'
+  from /usr/share/crystal/src/fiber.cr:146:11 in 'run'
+  from /usr/share/crystal/src/fiber.cr:98:34 in '->'
+  from ???
+
+2023-10-06T11:30:12.045452Z   INFO - http.server: 127.0.0.1 - GET /cgi-bin/hello.cgi HTTP/1.1 - 200 (26.39ms)
+2023-10-06T11:30:12.045468Z  ERROR - http.server: Unhandled exception
+Negative count: -1 (ArgumentError)
+  from /usr/share/crystal/src/indexable.cr:967:5 in '[]?'
+  from /usr/share/crystal/src/array.cr:655:5 in '[]'
+  from src/handlers.cr:34:9 in 'call'
+  from /usr/share/crystal/src/http/server/handler.cr:30:7 in 'call_next'
+  from /usr/share/crystal/src/http/server/handlers/log_handler.cr:17:7 in 'call'
+  from /usr/share/crystal/src/http/server/handler.cr:30:7 in 'call_next'
+  from /usr/share/crystal/src/http/server/handlers/static_file_handler.cr:80:12 in 'call'
+  from /usr/share/crystal/src/http/server/handler.cr:30:7 in 'call_next'
+  from /usr/share/crystal/src/http/server/handlers/error_handler.cr:18:5 in 'call'
+  from /usr/share/crystal/src/http/server/request_processor.cr:51:11 in 'process'
+  from /usr/share/crystal/src/http/server.cr:521:5 in 'handle_client'
+  from /usr/share/crystal/src/http/server.cr:451:5 in '->'
+  from /usr/share/crystal/src/fiber.cr:146:11 in 'run'
+  from /usr/share/crystal/src/fiber.cr:98:34 in '->'
+  from ???
+
+2023-10-06T11:33:44.814828Z   INFO - http.server: 127.0.0.1 - GET /cgi-bin/hello.cgi HTTP/1.1 - 200 (40.92s)
+2023-10-06T11:34:03.445394Z   INFO - http.server: 127.0.0.1 - GET /cgi-bin/hello.cgi HTTP/1.1 - 200 (35.85ms)
+2023-10-06T11:34:03.508303Z   INFO - http.server: 127.0.0.1 - GET /favicon.ico HTTP/1.1 - 200 (446.23µs)
+2023-10-06T11:46:57.537885Z   INFO - http.server: 127.0.0.1 - GET /cgi-bin/hello.cgi HTTP/1.1 - 200 (23.97ms)

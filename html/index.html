@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+ <meta charset="utf-8" />
+ <meta name="viewport" content="width=device-width,initial-scale=1" />
+ <title>Dojow Server index.html</title>
+ <!-- BootstrapのCSS読み込み -->
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+ <style>
+ .bgcolor {
+      background-color: whitesmoke;
+      border-radius: 8px;
+      padding: 10px
+    }
+ </style>
+</head>
+
+<body>
+ <!-- ヘッダー -->
+ <header class="container">
+  <h1 class="header-1 text-center p-5 bgcolor"><img src="./img/dojow.jpg"> Dojow Server index.html</h1>
+ </header>
+
+ <!-- 本文 -->
+ <article class="container">
+   <section class="row">
+    <h2 class="p-3 fs-4">はじめに</h2>
+     <p>Dojow server は Crystal で作られた小さなウェブサーバである。大規模アプリケーション向けではないので、家庭内 LAN などの環境で動作することを前提にしている。</p>
+    <br />
+    <h2 class="p-3 fs-4">インストール</h2>
+      <p>GitHub から次のコマンドで clone する。</p>
+      <p>T.B.D.</p>
+    <br />
+    <h2 class="p-3 fs-4">ビルド</h2>
+     <p>dojow フォルダ内の build.sh を ./dojow にて実行する。(Linux での使用を前提にしている)</p>
+    <br />
+    <h2 class="p-3 fs-4">テストメニュー</h2>
+    <ul class="ms-5">
+     <li><a href="/hello" target="_blank">Hello World!</a></li>
+     <li><a href="/echo?message=Hello+You! こんにちわ!" target="_blank">Echo</a></li>
+     <li><a href="/echo_form" target="_blank">Echo Form</a></li>
+     <li><a href="/session" target="_blank">Session</a></li>
+     <li><a href="/regex/2023" target="_blank">Regex</a></li>
+     <li><a href="/command?cmd=ls%20%2Fhome" target="_blank">Command Handler</a></li>
+     <li><a href="/cgi-bin/echo.cgi?message=Hello%20World!" target="_blank">CGI Handler</a></li>
+     <li><a href="/webservice?value=2.51" target="_blank">Web service</a></li>
+    </ul>
+   </section>
+ </article>
+ 
+ <!-- フッター -->
+ <footer class="container">
+  <p class="text-center mt-4"><a href="#top">TOP</a></p>
+  <p>&nbsp;</p>
+ </footer>
+ <!-- BootstrapのJS読み込み -->
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
