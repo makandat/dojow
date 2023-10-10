@@ -2,13 +2,14 @@
 require "log"
 require "json"
 require "http/server"
+require "./cs_handlers"
 require "./handlers"
 
 # Dojow module
 module Dojow
   extend self
   # Constants
-  VERSION = "0.3.1"
+  VERSION = "0.4.0"
   CONFIG = "./dojow.json"
   LOGNAME = "http.server"
 
@@ -54,12 +55,12 @@ module Dojow
 
   # CGIHandler
   def cgi_handler(path : String)
-    DojowHandlers::CGIHanlder.new(path)
+    CustomHandlers::CGIHanlder.new(path)
   end
 
   # CommandHandler
   def command_handler
-    DojowHandlers::CommandHandler.new
+    CustomHandlers::CommandHandler.new
   end
   
   # Create Dojow HTTP Server
