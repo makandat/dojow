@@ -1,4 +1,4 @@
 #!/bin/sh
-
+#  The switch "-v" means verbose
 ./bin/dojow -v
 

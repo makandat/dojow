@@ -116,4 +116,21 @@ module CustomHandlers
     end
   end
 
+  # MpHanlder
+  class MpHandler
+      include HTTP::Handler
+    @buff = ""
+    
+    def call(context)
+      req = context.request
+      @buff = ""
+      if req.method == "POST"
+        if !req.body.nil?
+          p! req.headers
+          @buff = req.body.as(IO).getb_to_end
+        end
+      end
+      call_next(context)
+    end
+  end
 end

@@ -1,12 +1,12 @@
 name: dojow
-version: 0.1.0
+version: 0.1.1
 
 authors:
-  - your-name-here <your-email-here>
+  - makandat@github
 
 targets:
   dojow:
-    main: src/dojow.cr
+    main: src/server.cr
 dependencies:
   mysql:
     github: crystal-lang/crystal-mysql

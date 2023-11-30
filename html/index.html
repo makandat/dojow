@@ -13,6 +13,22 @@
       padding: 10px
     }
  </style>
+ <script>
+  async function post_ws_test() {
+    const jsondata = '{"a":"AA", "b":"BBB"}'
+    const response = await fetch("/ws_test", {method:"POST", headers:{"content-type":"application/json"}, body:jsondata});
+    const data = await response.json();
+    const result = document.getElementById("result");
+    result.innerText = JSON.stringify(data);
+  }
+
+  async function head_ws_test() {
+    const response = await fetch("/ws_test", {method:"HEAD"});
+    const data = await response.headers
+    const result = document.getElementById("result");
+    result.innerText = data;
+  }
+ </script>
 </head>
 
 <body>
@@ -34,7 +50,11 @@
     <h2 class="p-3 fs-4">ビルド</h2>
      <p>dojow フォルダ内の build.sh を ./dojow にて実行する。(Linux での使用を前提にしている)</p>
     <br />
+    <h2 class="p-3 fs-4">実行</h2>
+     <p>dojow フォルダ内で "./bin/dojow -v" を実行する。-v は verbose の意味でこれを付けないとリクエスト状態は表示されない。</p>
+    <br />
     <h2 class="p-3 fs-4">テストメニュー</h2>
+    <div class="col">
     <ul class="ms-5">
      <li><a href="/hello" target="_blank">Hello World!</a></li>
      <li><a href="/echo?message=Hello+You! こんにちわ!" target="_blank">Echo</a></li>
@@ -45,6 +65,20 @@
      <li><a href="/cgi-bin/echo.cgi?message=Hello%20World!" target="_blank">CGI Handler</a></li>
      <li><a href="/webservice?value=2.51" target="_blank">Web service</a></li>
     </ul>
+    </div>
+    <div class="col">
+    <ul class="ms-5">
+     <li><a href="/ws_test?a=AA&b=BBB" target="_blank">GET ws_test</a></li>
+     <li><a href="javascript:post_ws_test()">POST ws_test</a></li>
+     <li><a href="javascript:head_ws_test()">HEAD ws_test</a></li>
+     <li><a href="/post_www_form">POST x-www-form-urlencoded</a></li>
+     <li><a href="/post_multipart_form">POST multipart_formdata</a></li>
+     <li><a href="/post_formdata">POST FormData object</a></li>
+     <li><a href="/post_blob">POST BLOB</a></li>
+    </ul>
+    </div>
+    <br>
+    <pre id="result"></pre>
    </section>
  </article>
  
