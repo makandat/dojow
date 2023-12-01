@@ -9,7 +9,7 @@ require "./handlers"
 module Dojow
   extend self
   # Constants
-  VERSION = "0.5.1"
+  VERSION = "0.5.2"
   CONFIG = "./dojow.json"
   LOGNAME = "http.server"
 

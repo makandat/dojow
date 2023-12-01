@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+ <meta charset="utf-8" />
+ <meta name="viewport" content="width=device-width,initial-scale=1" />
+ <title>Dojow Server /post_blob</title>
+ <!-- BootstrapのCSS読み込み -->
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+ <style>
+ .bgcolor {
+      background-color: whitesmoke;
+      border-radius: 8px;
+      padding: 10px
+    }
+ </style>
+ <script>
+   async function submit_click() {
+     const data = document.getElementById("data");
+     const str = data.value;
+     const blobdata = new Blob([str], {type:"text/plain"});
+     const options = {method:"POST", headers:{"content-type":"application/octed-stream"}, body:blobdata}
+     const request = new Request("/post_blob", options);
+     const response = await fetch(request);
+     const result_text = await response.text();
+     const result = document.getElementById("result");
+     result.innerText = result_text;
+   }
+ </script>
+</head>
+
+<body>
+  <section class="container">
+  <h1 class="text-center p-4 bgcolor">post_blob</h1>
+  <p class="text-center"><a href="/">HOME</a></p>
+  <br>
+  <form class="row" name="form1" method="POST" action="/post_blob">
+    <div class="mb-3"><label class="form-label">data<textarea name="data" id="data" cols="100" rows="8" class="form-control"></textarea></label></div>
+    <div class="mb-4"><button type="button" class="btn btn-primary" onclick="submit_click()"> Submit </button>&nbsp;<button type="button" class="btn btn-secondary" onclick="location.href='/post_blob'"> Reset </button></div>
+  </form>
+  <p class="fs-4 text-center" id="result"></p>
+  </div>
+  </section>
+</body>
+</html>

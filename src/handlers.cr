@@ -164,6 +164,10 @@ module DojowHandlers
       res.print rendered
     end
     post context, "/post_multipart_form" do |req, res, pattern|
+      number = "0"
+      filename = ""
+      chunk = ""
+      result = ""
       if req.body.nil?
         number = "0"
         filename = ""
@@ -173,25 +177,33 @@ module DojowHandlers
       end
       io = req.body.as(IO)
       body = io.gets_to_end
-      p! body
+      #p! body
       boundary = "--" + BodyParser.getBoundary(req)
       dispositions = BodyParser.getDispositions(body, boundary)
+      # This part for testing.
       dispositions.each do |d|
-        p! d
         if BodyParser.includesChunk?(d)
           name = BodyParser.getDispositionName(d)
           filename = BodyParser.getDispositionFileName(d)
           chunk = BodyParser.getDispositionChunk(d)
-          p! name
-          p! filename
-          p! chunk
+          #p! name
+          #p! filename
+          #p! chunk
         else
           name = BodyParser.getDispositionName(d)
           value = BodyParser.getDispositionValue(d)
-          p! name
-          p! value
+          #p! name
+          #p! value
         end
+      end # end of testing
+      number = BodyParser.getValue(dispositions, "number")
+      filename = BodyParser.getFileName(dispositions, "file1")
+      chunk = BodyParser.getChunk(dispositions, "file1").to_slice
+      if filename.size > 0
+        BodyParser.saveFile(filename, chunk)
       end
+      cs = chunk.size
+      result = "number=#{number}, filename=#{filename}, chunk.size=#{cs}"
       rendered = ECR.render "./templates/post_multipart_form.ecr"
       res.print rendered
     end
@@ -227,8 +239,62 @@ module DojowHandlers
     end
     post context, "/post_blob" do |req, res, pattern|
       data = req.body.as(IO).getb_to_end
+      p! data
       result = "OK (#{data})"
       res.content_type = "text/plain";
+      res.puts result
+    end
+    
+    # post_formdata2 (multipart)
+    get context, "/post_formdata2" do |req, res, pattern|
+      rendered = ECR.render "./templates/post_formdata2.ecr"
+      res.print rendered        
+    end
+    post context, "/post_formdata2" do |req, res, pattern|
+      result = ""
+      if req.body.nil?
+        res.content_type = "text/plain";
+        result = "The Request.body is empty."
+      else
+        io = req.body.as(IO)
+        body = io.gets_to_end
+        boundary = "--" + BodyParser.getBoundary(req)
+        dispositions = BodyParser.getDispositions(body, boundary)
+        x = BodyParser.getValue(dispositions, "X") 
+        y = BodyParser.getValue(dispositions, "Y")
+        filename = BodyParser.getFileName(dispositions, "file1")
+        res.content_type = "application/json";
+        #data = {"X"=>x, "Y"=>y, "file1"=>filename}
+        #mem = IO::Memory.new(2048)
+        #jbuilder = JSON::Builder.new(mem)
+        #data.to_json(jbuilder)
+        #result = mem.to_s
+        result = %({"X":"#{x}", "Y":"#{y}", "file1":"#{filename}"})
+      end
+      res.puts result
+    end
+
+    # post_request (multipart)
+    get context, "/post_request" do |req, res, pattern|
+      rendered = ECR.render "./templates/post_request.ecr"
+      res.print rendered        
+    end
+    post context, "/post_request" do |req, res, pattern|
+      result = ""
+      if req.body.nil?
+        res.content_type = "text/plain";
+        result = "The Request.body is empty."
+      else
+        io = req.body.as(IO)
+        body = io.gets_to_end
+        boundary = "--" + BodyParser.getBoundary(req)
+        dispositions = BodyParser.getDispositions(body, boundary)
+        x = BodyParser.getValue(dispositions, "X") 
+        y = BodyParser.getValue(dispositions, "Y")
+        z = BodyParser.getValue(dispositions, "Z")
+        res.content_type = "application/json";
+        result = %({"X":"#{x}", "Y":"#{y}", "Z":"#{z}"})
+      end
       res.puts result
     end
     

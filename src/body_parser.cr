@@ -81,7 +81,7 @@ module BodyParser
     
   # get filename of the disposition if exists (INTERNAL USE)
   def getDispositionFileName(disposition : String) : String 
-    p = disposition.index("Content-Disposition : form-data; name=\"")
+    p = disposition.index("Content-Disposition: form-data; name=\"")
     if p.nil?
       return ""
     else
@@ -108,7 +108,7 @@ module BodyParser
       p1 = p1 + "Content-Type: application/octet-stream".size
       p1 = disposition.index("\r\n", p1).as(Int32)
       p1 = disposition.index("\r\n", p1).as(Int32) + 2
-      return disposition[p1 .. disposition.size - 4]
+      return disposition[p1 .. disposition.size - 3]
     end
   end
 
@@ -120,13 +120,10 @@ module BodyParser
   def getValue(dispositions : Array(String), name : String) : String
     name1 = ""
     dispositions.each do |d|
-      name1 = d.getDispositionName()
+      name1 = getDispositionName(d)
       if name == name1
-        s = URI.decode(d.getDispositionValue())
-        if s.ends_with?("\r")
-          s = s[0 .. s.size - 2]
-          return s
-        end
+        s = URI.decode(getDispositionValue(d))
+        return s
       end
     end
     return ""
@@ -136,10 +133,14 @@ module BodyParser
   def getChunk(dispositions : Array(String), name : String) : String
     name1 = ""
     dispositions.each do |d|
-      if d.includesChunk?()
-        name1 = d.getDispositionName()
+      if includesChunk?(d)
+        name1 = getDispositionName(d)
         if name == name1
-          return URI.decode(d.getDispositionChunk())
+          chunk = getDispositionChunk(d)
+          if chunk.starts_with?("\r\n")
+            chunk = chunk[2 ..]
+          end
+          return URI.decode(chunk)
         end
       end
     end
@@ -150,10 +151,11 @@ module BodyParser
   def getFileName(dispositions : Array(String), name : String) : String
     name1 = ""
     dispositions.each do |d|
-      if d.includesChunk?()
-        name1 = d.getDispositionName()
+      if includesChunk?(d)
+        name1 = getDispositionName(d)
         if name == name1
-          return URI.decode(d.getDispositionFileName())
+          filename = getDispositionFileName(d)
+          return URI.decode(filename)
         end
       end
     end

@@ -116,7 +116,7 @@ module CustomHandlers
     end
   end
 
-  # MpHanlder
+  # MpHanlder (for test)
   class MpHandler
       include HTTP::Handler
     @buff = ""
