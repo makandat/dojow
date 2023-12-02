@@ -9,7 +9,7 @@ require "./handlers"
 module Dojow
   extend self
   # Constants
-  VERSION = "0.5.2"
+  VERSION = "0.6.0"
   CONFIG = "./dojow.json"
   LOGNAME = "http.server"
 
@@ -63,9 +63,9 @@ module Dojow
     CustomHandlers::CommandHandler.new
   end
 
-  # MpHandler
-  def mp_handler()
-    CustomHandlers::MpHandler.new()
+  # DefaultHandler
+  def default_handler(public_html)
+    CustomHandlers::DefaultHandler.new(public_html)
   end
   
   # Create Dojow HTTP Server
@@ -78,9 +78,9 @@ module Dojow
     logh = log_handler(LOGNAME, settings["log"])
     cgih = cgi_handler(settings["cgi-bin"])
     commandh = command_handler
-    # mph = mp_handler
+    defaulth = default_handler(settings["static"])
     # Create HTTP Server
-    server = HTTP::Server.new([ errorh, statich, logh, cgih, commandh ]) do |context|
+    server = HTTP::Server.new([ errorh, statich, logh, cgih, commandh, defaulth ]) do |context|
       puts %(#{context.request.method}, #{context.request.hostname}, #{context.request.path}) if verbose
       DojowHandlers.call(context)
     end

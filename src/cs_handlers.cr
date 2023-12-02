@@ -116,21 +116,29 @@ module CustomHandlers
     end
   end
 
-  # MpHanlder (for test)
-  class MpHandler
+  # DefaultHanlder
+  class DefaultHandler
       include HTTP::Handler
-    @buff = ""
+    @index_html : String
+    
+    def initialize(public_html)
+      @index_html = public_html + "/index.html"
+    end
     
     def call(context)
       req = context.request
-      @buff = ""
-      if req.method == "POST"
-        if !req.body.nil?
-          p! req.headers
-          @buff = req.body.as(IO).getb_to_end
+      res = context.response
+      if req.method == "GET"
+        if req.path == "" || req.path == "/"
+          html = File.read(@index_html)
+          res.content_type = "text/html; charset=utf-8"
+          res.print html
+        else
+          call_next(context)
         end
+      else
+        call_next(context)
       end
-      call_next(context)
     end
   end
 end
