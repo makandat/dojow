@@ -9,9 +9,10 @@ require "./handlers"
 module Dojow
   extend self
   # Constants
-  VERSION = "0.6.0"
+  VERSION = "1.0.0"
   CONFIG = "./dojow.json"
   LOGNAME = "http.server"
+  @@settings = Hash(String, String).new
 
   # Aliases
   alias HttpRequest = HTTP::Request
@@ -20,7 +21,16 @@ module Dojow
   # Read the settings file
   def read_settings(file_path : String) : Hash(String, String)
     json_text = File.read(file_path)
-    Hash(String, String).from_json(json_text)  
+    Hash(String, String).from_json(json_text)
+  end
+
+  # get settings[key]
+  def get_setting(key)
+    if @@settings.has_key?(key)
+      @@settings[key]
+    else
+      ""
+    end
   end
   
   # CompressHandler
@@ -67,25 +77,25 @@ module Dojow
   def default_handler(public_html)
     CustomHandlers::DefaultHandler.new(public_html)
   end
-  
+
   # Create Dojow HTTP Server
   def create(verbose : Bool = false) : HTTP::Server
     # Read settings
-    settings = read_settings(CONFIG)
+    @@settings = read_settings(CONFIG)
     # Create HTTP Handlers
-    errorh = error_handler(LOGNAME, settings["error"])
-    statich = static_handler(settings["static"])
-    logh = log_handler(LOGNAME, settings["log"])
-    cgih = cgi_handler(settings["cgi-bin"])
+    errorh = error_handler(LOGNAME, @@settings["error"])
+    statich = static_handler(@@settings["static"])
+    logh = log_handler(LOGNAME, @@settings["log"])
+    cgih = cgi_handler(@@settings["cgi-bin"])
     commandh = command_handler
-    defaulth = default_handler(settings["static"])
+    defaulth = default_handler(@@settings["static"])
     # Create HTTP Server
     server = HTTP::Server.new([ errorh, statich, logh, cgih, commandh, defaulth ]) do |context|
       puts %(#{context.request.method}, #{context.request.hostname}, #{context.request.path}) if verbose
       DojowHandlers.call(context)
     end
   end
-  
+
   # Listen to the requests from the clients.
   def listen(server : HTTP::Server, host : String = "127.0.0.1", port : Int32 = 2023)
     server.bind_tcp(host, port)

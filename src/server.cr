@@ -25,7 +25,9 @@ if help
   "error":"./log/error.log",
   "log":"./log/server.log",
   "host":"192.168.1.4",
-  "port":"2023"
+  "port":"2023",
+  "mysql":"mysql:","mysql://user:password@localhost/database",
+  "sqlite3":"sqlite3://file.db"
  }
 EOS
 else

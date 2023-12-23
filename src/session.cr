@@ -1,28 +1,27 @@
 # Session variables
+require "http/cookie"
+require "uri"
+require "json"
+
 module Session
   extend self
-
-  # Create the session variable
+  SESSION_NAME = "dojow_session"
+  
+  # Create the session hash variable
   def create(cookies : HTTP::Cookies) : Hash(String, String)
     session = Hash(String, String).new
-    from_cookies(session, cookies)
-  end
-
-  # Convert from cookies
-  def from_cookies(session : Hash(String, String), cookies : HTTP::Cookies) : Hash(String, String)
-    cookies.each do |c|
-      session[c.name] = c.value
+    if cookies.has_key?(SESSION_NAME)
+      c = cookies[SESSION_NAME]
+      dv =  URI.decode(c.value)
+      session = Hash(String, String).from_json(dv)
     end
     return session
   end
-  
-  # Convert to cookie
-  def to_cookies(session : Hash(String, String)) : HTTP::Cookies
-    cookies = HTTP::Cookies.new
-    session.each do |k, v|
-      c = HTTP::Cookie.new(k, v)
-      cookies << c
-    end
-    return cookies
+ 
+  # Convert session hash to cookie
+  def to_cookie(session : Hash(String, String)) : HTTP::Cookie
+    v = URI.encode_path(session.to_json)
+    c = HTTP::Cookie.new(SESSION_NAME, v)
+    return c
   end
 end

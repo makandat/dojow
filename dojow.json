@@ -4,5 +4,7 @@
   "error":"./log/error.log",
   "log":"./log/server.log",
   "host":"192.168.1.4",
-  "port":"2023"
+  "port":"2023",
+  "mysql":"mysql://user:ust62kjy@localhost/user",
+  "sqlite3":"sqlite3://dojow.db"
 }

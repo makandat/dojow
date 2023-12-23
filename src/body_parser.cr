@@ -22,7 +22,7 @@ module BodyParser
     end
     return boundary
   end
-    
+
   # get dispositions
   def getDispositions(body : String, boundary : String) : Array(String)
     disps = body.split(boundary)
@@ -34,14 +34,23 @@ module BodyParser
     end
     return well
   end
-    
+
   # If the disposition include a chunk, then return true.
   def includesChunk?(disposition : String) : Bool
     return !disposition.index("Content-Type: ").nil?
   end
-  
-  # save the chunk as file
-  def saveFile(filename : String, chunk : Slice(UInt8))
+
+  # save string to file
+  def saveFile(filename : String, chunk : String) : String
+    savePath = "./upload/#{filename}"
+    f = File.new(savePath, mode="wb")
+    f.print(chunk)
+    f.close
+    return savePath
+  end
+
+  # save bytes to file
+  def saveFile(filename : String, chunk : Bytes)
     f = File.new("./upload/" + filename, mode="wb")
     f.write(chunk)
     f.close
@@ -63,7 +72,7 @@ module BodyParser
       return disposition[p1 .. q.as(Int32) - 1]
     end
   end
-    
+
   # get the disposition value (INTERNAL USE)
   def getDispositionValue(disposition : String) : String
     p = disposition.index("Content-Type: ")
@@ -78,9 +87,9 @@ module BodyParser
     end
     return lines[n]
   end
-    
+
   # get filename of the disposition if exists (INTERNAL USE)
-  def getDispositionFileName(disposition : String) : String 
+  def getDispositionFileName(disposition : String) : String
     p = disposition.index("Content-Disposition: form-data; name=\"")
     if p.nil?
       return ""
@@ -100,15 +109,14 @@ module BodyParser
 
   # get the chunk if content-type is octed stream (INTERNAL USE)
   def getDispositionChunk(disposition : String) : String
-    p = disposition.index("Content-Type: application/octet-stream")
+    p = disposition.index("filename=")
     if p.nil?
       return ""
     else
       p1 = p.as(Int32)
-      p1 = p1 + "Content-Type: application/octet-stream".size
-      p1 = disposition.index("\r\n", p1).as(Int32)
-      p1 = disposition.index("\r\n", p1).as(Int32) + 2
-      return disposition[p1 .. disposition.size - 3]
+      p2 = disposition.index("\r\n\r\n", p1).as(Int32) + 4
+      chunk = disposition[p2 .. disposition.size - 3]
+      return chunk
     end
   end
 
@@ -128,7 +136,7 @@ module BodyParser
     end
     return ""
   end
-    
+
   # get the chunk of the name
   def getChunk(dispositions : Array(String), name : String) : String
     name1 = ""
@@ -146,7 +154,7 @@ module BodyParser
     end
     return ""
   end
-    
+
   # get filename of the name
   def getFileName(dispositions : Array(String), name : String) : String
     name1 = ""
@@ -166,15 +174,12 @@ end # module
 
 
 BODY = %{-----------------------------26767473973547735812633686047
-Content-Disposition: form-data; name="file1"; filename="CGIgw.ps1"
+Content-Disposition: form-data; name="file1"; filename="data.txt"
 Content-Type: application/octet-stream
 
-if ($args.length -le 0) {
-  python D:\workspace\Scripts\Python3\bin\CGIInterpreter.py
-}
-else {
-  python D:\workspace\Scripts\Python3\bin\CGIInterpreter.py $args[0]
-}
+AAAAAAAAAAAAAAAAAAAAAAAAAAAA
+BBBBBBBBBBBBBBBBBBBBBBBBBBBB
+CCCCCCCCCCCCCCCCC
 -----------------------------26767473973547735812633686047
 Content-Disposition: form-data; name="title"
 
