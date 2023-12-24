@@ -112,6 +112,16 @@ HEREDOC
     end
     return params
   end
+  
+  # From posted JSON(body) to Hash
+  def parseJsonBody(body : IO | Nil) : Hash(String, String)
+    hash = Hash(String, String).new
+    if ! body.nil?
+      json = body.as(IO).gets_to_end
+      hash = Hash(String, String).from_json(json)
+    end
+    return hash.as(Hash(String, String))
+  end
 
   # Get bytes from body (of ArrayBuffer)
   def getBytes(body : IO | Nil) : Bytes
@@ -490,6 +500,73 @@ HEREDOC
       showMessage(res, "テスト", "これはテストメッセージです。")
     end
 
+    # GET /get_command
+    get context, "/get_command" do |req, res|
+      if req.query_params.size > 0
+        parts = req.query_params["cmd"].split(/\s/)
+        cmd = parts[0]
+        args = parts[1 ..]
+        dir = req.query_params["dir"]
+        if dir == ""
+          dir = "./"
+        end
+        r, w = IO.pipe
+        Process.run(cmd, args, chdir:dir, shell:true, output:w)
+        w.close
+        res.content_type = "text/plain; charset=utf-8"
+        result = r.gets_to_end
+        res.print result
+      else
+        rendered = ECR.render "./templates/get_command.ecr"
+        res.print rendered
+      end
+    end
+
+    # GET /post_command
+    get context, "/post_command" do |req, res|
+      rendered = ECR.render "./templates/post_command.ecr"
+      res.print rendered
+    end
+
+    # POST /post_command
+    post context, "/post_command" do |req, res|
+      form = parseJsonBody(req.body)
+      parts = form["cmd"].split(/\s/)
+      cmd = parts[0]
+      args = parts[1 ..]
+      dir = form["dir"]
+      if dir == ""
+        dir = "./"
+      end
+      r, w = IO.pipe
+      Process.run(cmd, args, chdir:dir, shell:true, output:w)
+      w.close
+      res.content_type = "text/plain; charset=utf-8"
+      result = r.gets_to_end
+      res.print result
+    end
+
+    # Logging
+    get context, "/logging" do |req, res|
+      logpath = "./log/server.log"
+      len = 100
+      loglines = Array(String).new
+      if File.exists?(logpath)
+        q = Deque.new(len, "")
+        File.each_line(logpath) do |line|
+          q.push(line) if line.size > 0
+          if q.size > len
+            q.shift
+          end
+        end
+        (0 .. len - 1).each do |i|
+          loglines.push(q.shift)
+        end
+      end
+      rendered = ECR.render "./templates/logging.ecr"
+      res.print rendered
+    end
+    
     # TODO: Add your handlers.
 
   end # of call(context) method

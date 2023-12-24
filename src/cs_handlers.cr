@@ -90,13 +90,13 @@ module CustomHandlers
         parts = [] of String
         dir = nil
         if req.method == "GET"
-          parts = req.query_params["cmd"].split(" ")
+          parts = req.query_params["cmd"].split(/\s/)
           Log.info {parts[1]} if @verbose
           if req.query_params.has_key?("dir")
             dir = req.query_params["dir"]
           end
         elsif req.method == "POST"
-          parts = req.form_params["cmd"].split(" ")
+          parts = req.form_params["cmd"].split(/\s/)
           if req.form_params.has_key?("dir")
             dir = req.form_params["dir"]
           end

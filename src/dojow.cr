@@ -9,25 +9,27 @@ require "./handlers"
 module Dojow
   extend self
   # Constants
-  VERSION = "1.0.0"
+  VERSION = "1.0.2"
   CONFIG = "./dojow.json"
   LOGNAME = "http.server"
-  @@settings = Hash(String, String).new
-
+  
   # Aliases
   alias HttpRequest = HTTP::Request
   alias HttpResponse = HTTP::Server::Response
 
+  # Variables
+  @@settings = Hash(String, String).new
+  
   # Read the settings file
   def read_settings(file_path : String) : Hash(String, String)
     json_text = File.read(file_path)
     Hash(String, String).from_json(json_text)
   end
 
-  # get settings[key]
-  def get_setting(key)
-    if @@settings.has_key?(key)
-      @@settings[key]
+  # Get @@settings value
+  def get_setting(name)
+    if @@settings.has_key?(name)
+      @@settings[name]
     else
       ""
     end

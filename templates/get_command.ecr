@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+ <meta charset="utf-8" />
+ <meta name="viewport" content="width=device-width,initial-scale=1" />
+ <title>GET Command</title>
+ <!-- Bootstrap の CSS 読み込み -->
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+ <script>
+  async function submit_Click() {
+    const cmd = encodeURIComponent(form1.cmd.value);
+    const dir = encodeURIComponent(form1.dir.value);
+    const url = `/get_command?cmd=${cmd}&dir=${dir}`
+    const response = await fetch(url);
+    const text = await response.text();
+    const result = document.getElementById("result");
+    result.innerText = text;
+  }
+ </script>
+</head>
+
+<body>
+ <!-- ヘッダー -->
+ <header class="container mb-5">
+  <h1 class="text-center  bg-light border p-4">GET Command</h1>
+ </header>
+
+ <article class="container">
+  <form method="GET" name="form1" action="/command" onsubmit="return false;">
+   <div class="mb-2"><label class="form-control-label">command<input type="text" class="form-control" name="cmd" size="80"></label></div>
+   <div class="mb-4"><label class="form-control-label">working dir<input type="text" class="form-control" name="dir" size="80"></label></div>
+   <div class="mb-4"><input type="button" value="Execute" class="btn btn-primary" onclick="submit_Click()"></div>
+  </form>
+  <pre id="result" class="border p-1 mt-4"></pre>
+ </article>
+
+</body>
+ <!-- BootstrapのJS読み込み -->
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</html>
